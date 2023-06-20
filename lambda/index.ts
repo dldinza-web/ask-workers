@@ -4,6 +4,7 @@
  * session persistence, api calls, and more.
  * */
 import * as Alexa from 'ask-sdk-core'
+import { CreateWorkerIntentHandler } from './src/intents/create-worker.intent';
 
 const LaunchRequestHandler = {
     canHandle(handlerInput: any) {
@@ -26,22 +27,6 @@ const HelloWorldIntentHandler = {
     },
     handle(handlerInput: any) {
         const speakOutput = 'Ready to Manage workers';
-
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
-            .getResponse();
-    }
-};
-
-const CreateWorkerIntentHandler = {
-    canHandle(handlerInput: any) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'CreateWorkerIntent';
-    },
-    handle(handlerInput: any) {
-        const speakOutput = 'New workers created!! Yaaay!'
-        console.log('!!!!speakOutput', speakOutput)
 
         return handlerInput.responseBuilder
             .speak(speakOutput)

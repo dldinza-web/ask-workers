@@ -29,9 +29,18 @@ provider:
   region: us-east-1
 
 # you can add statements to the Lambda function's IAM Role here
-#  iam:
-#    role:
-#      statements:
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Resource: "arn:aws:dynamodb:us-east-1:*:table/workers"
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
 #        - Effect: "Allow"
 #          Action:
 #            - "s3:ListBucket"
