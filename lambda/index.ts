@@ -3,13 +3,13 @@
  * Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
  * session persistence, api calls, and more.
  * */
-const Alexa = require('ask-sdk-core');
+import * as Alexa from 'ask-sdk-core'
 
 const LaunchRequestHandler = {
-    canHandle(handlerInput) {
+    canHandle(handlerInput: any) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
-    handle(handlerInput) {
+    handle(handlerInput: any) {
         const speakOutput = 'Welcome, you can say Hello or Help. Which would you like to try?';
 
         return handlerInput.responseBuilder
@@ -20,11 +20,11 @@ const LaunchRequestHandler = {
 };
 
 const HelloWorldIntentHandler = {
-    canHandle(handlerInput) {
+    canHandle(handlerInput: any) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HelloWorldIntent';
     },
-    handle(handlerInput) {
+    handle(handlerInput: any) {
         const speakOutput = 'Ready to Manage workers';
 
         return handlerInput.responseBuilder
@@ -35,12 +35,13 @@ const HelloWorldIntentHandler = {
 };
 
 const CreateWorkerIntentHandler = {
-    canHandle(handlerInput) {
+    canHandle(handlerInput: any) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'CreateWorkerIntent';
     },
-    handle(handlerInput) {
-        const speakOutput = 'New workers created'
+    handle(handlerInput: any) {
+        const speakOutput = 'New workers created!! Yaaay!'
+        console.log('!!!!speakOutput', speakOutput)
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -50,11 +51,11 @@ const CreateWorkerIntentHandler = {
 };
 
 const HelpIntentHandler = {
-    canHandle(handlerInput) {
+    canHandle(handlerInput: any) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent';
     },
-    handle(handlerInput) {
+    handle(handlerInput: any) {
         const speakOutput = 'You can say hello to me! How can I help?';
 
         return handlerInput.responseBuilder
@@ -65,12 +66,12 @@ const HelpIntentHandler = {
 };
 
 const CancelAndStopIntentHandler = {
-    canHandle(handlerInput) {
+    canHandle(handlerInput: any) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && (Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.CancelIntent'
                 || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
     },
-    handle(handlerInput) {
+    handle(handlerInput: any) {
         const speakOutput = 'Goodbye!';
 
         return handlerInput.responseBuilder
@@ -84,11 +85,11 @@ const CancelAndStopIntentHandler = {
  * This handler can be safely added but will be ingnored in locales that do not support it yet 
  * */
 const FallbackIntentHandler = {
-    canHandle(handlerInput) {
+    canHandle(handlerInput: any) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.FallbackIntent';
     },
-    handle(handlerInput) {
+    handle(handlerInput: any) {
         const speakOutput = 'Sorry, I don\'t know about that. Please try again.';
 
         return handlerInput.responseBuilder
@@ -103,10 +104,10 @@ const FallbackIntentHandler = {
  * respond or says something that does not match an intent defined in your voice model. 3) An error occurs 
  * */
 const SessionEndedRequestHandler = {
-    canHandle(handlerInput) {
+    canHandle(handlerInput: any) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'SessionEndedRequest';
     },
-    handle(handlerInput) {
+    handle(handlerInput: any) {
         console.log(`~~~~ Session ended: ${JSON.stringify(handlerInput.requestEnvelope)}`);
         // Any cleanup logic goes here.
         return handlerInput.responseBuilder.getResponse(); // notice we send an empty response
@@ -118,10 +119,10 @@ const SessionEndedRequestHandler = {
  * by defining them above, then also adding them to the request handler chain below 
  * */
 const IntentReflectorHandler = {
-    canHandle(handlerInput) {
+    canHandle(handlerInput: any) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest';
     },
-    handle(handlerInput) {
+    handle(handlerInput: any) {
         const intentName = Alexa.getIntentName(handlerInput.requestEnvelope);
         const speakOutput = `You just triggered ${intentName}`;
 
@@ -140,7 +141,7 @@ const ErrorHandler = {
     canHandle() {
         return true;
     },
-    handle(handlerInput, error) {
+    handle(handlerInput: any, error: any) {
         const speakOutput = 'Sorry, I had trouble doing what you asked. Please try again.';
         console.log(`~~~~ Error handled: ${JSON.stringify(error)}`);
 
@@ -156,7 +157,7 @@ const ErrorHandler = {
  * payloads to the handlers above. Make sure any new handlers or interceptors you've
  * defined are included below. The order matters - they're processed top to bottom 
  * */
-exports.handler = Alexa.SkillBuilders.custom()
+export const handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
         HelloWorldIntentHandler,

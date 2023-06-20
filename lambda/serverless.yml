@@ -52,6 +52,7 @@ provider:
 
 # you can add packaging information here
 package:
+  individually: true
   patterns:
     - node_modules/**
 #    - '!exclude-me.js'
@@ -61,10 +62,11 @@ package:
 
 plugins:
   - serverless-offline
+  - serverless-plugin-typescript
 
 functions:
   skill:
-    handler: lambda/index.handler
+    handler: index.handler
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

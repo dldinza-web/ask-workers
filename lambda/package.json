@@ -14,6 +14,8 @@
     "aws-sdk": "^2.326.0"
   },
   "devDependencies": {
-    "serverless-offline": "^12.0.4"
+    "serverless-offline": "^12.0.4",
+    "serverless-plugin-typescript": "^2.1.5",
+    "typescript": "^5.1.3"
   }
 }
