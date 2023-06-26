@@ -39,8 +39,17 @@
           "slots": [],
           "name": "CreateWorkerIntent",
           "samples": [
+            "create another worker",
             "new worker",
             "create a worker"
+          ]
+        },
+        {
+          "slots": [],
+          "name": "ShowAllWorkersIntent",
+          "samples": [
+            "list of workers",
+            "show all workers"
           ]
         }
       ],

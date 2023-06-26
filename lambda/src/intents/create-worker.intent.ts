@@ -9,11 +9,11 @@ export const CreateWorkerIntentHandler = {
     async handle(handlerInput: any) {
         const worker = await createWorker()
         
-        const speakOutput = `The New worker "${worker.name}" has been created successfully!!`
+        const speakOutput = `The new worker "${worker.name}" has been created successfully!!`
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+            .reprompt('you can list all workers')
             .getResponse();
     }
 };

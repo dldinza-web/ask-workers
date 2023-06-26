@@ -5,13 +5,14 @@
  * */
 import * as Alexa from 'ask-sdk-core'
 import { CreateWorkerIntentHandler } from './src/intents/create-worker.intent';
+import { ShowAllWorkersIntentHandler } from './src/intents/show-all-workers.intent'
 
 const LaunchRequestHandler = {
     canHandle(handlerInput: any) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput: any) {
-        const speakOutput = 'Welcome, you can say Hello or Help. Which would you like to try?';
+        const speakOutput = 'Welcome to Disney Workers Management System, you can create a worker, show all workers.';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -147,6 +148,7 @@ export const handler = Alexa.SkillBuilders.custom()
         LaunchRequestHandler,
         HelloWorldIntentHandler,
         CreateWorkerIntentHandler,
+        ShowAllWorkersIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         FallbackIntentHandler,

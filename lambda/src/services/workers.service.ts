@@ -17,7 +17,25 @@ export const createWorker = async () => {
     }
 
     const dbResponse = await dynamoDbDocument.put(dynamoParams).promise()
-    console.log('!!! dbResponse', dbResponse)
 
     return worker
+}
+
+export const retrieveAllWorkers = async () => {
+    const dynamoParams = {
+        TableName: 'workers'
+    }
+
+    let items: any[] = []
+
+    do {
+        const dbResponse = await dynamoDbDocument.scan(dynamoParams).promise()
+        items = items.concat(dbResponse.Items)
+
+        console.log('!!!!dbResponse.LastEvaluatedKey', dbResponse.LastEvaluatedKey, (dbResponse.Items) ? dbResponse.Items[0] : null)
+
+        dynamoParams.ExclusiveStartKey = dbResponse.LastEvaluatedKey
+    } while(dynamoParams.ExclusiveStartKey)
+
+    return items
 }
